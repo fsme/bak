@@ -17,8 +17,8 @@ using namespace cxx;
 
 namespace cxx {
 
-///\class Virtual buffer
-///\brief Buffer for ::read(2) or ::write(2) with report 
+///\class buffer
+///\brief Virtual Buffer for ::read(2) or ::write(2) with report 
 
 class buffer
 {
@@ -65,10 +65,7 @@ operator void* () const { return (void*)_ptr; }
 virtual bool read () = 0;
 
 ///\brief Virtual write
-virtual bool write (
-	  void* ptr_	///\param Buffer pointer
-	, ssize_t size_	///\param Size to write
-) = 0;
+virtual bool write (void* ptr_, ssize_t size_) = 0;
 
 protected:
 	ssize_t		_size;		///< Buffered data size (amount read or write)
@@ -158,8 +155,8 @@ virtual bool read ()
 ///\brief Empty write
 ///\return False always
 virtual bool write (
-	  void* ptr_ = 0	///\param Buffer pointer
-	, ssize_t size_ = 0	///\param Size to write
+	  void* ptr_ = 0	///\param ptr_ Buffer pointer
+	, ssize_t size_ = 0	///\param size_ Size to write
 ) {
 	return false;
 }
@@ -209,8 +206,8 @@ virtual void open (
 ///\brief Write to file
 ///\return True if ::write(2) return more then zero
 virtual bool write (
-	  void* ptr_	///\param Buffer pointer
-	, ssize_t size_	///\param Size to write
+	  void* ptr_	///\param ptr_ Buffer pointer
+	, ssize_t size_	///\param size_ Size to write
 ) {
 	_size = ::write (_fd, ptr_, size_);
 	if (_size == -1)
