@@ -1,0 +1,1 @@
+To backup and restore ciphered disc's or partition's images
